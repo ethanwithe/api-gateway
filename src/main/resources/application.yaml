@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${PORT:8080}  # ⬅️ CAMBIO CRÍTICO: Usar puerto dinámico de Railway
 
 spring:
   application:
@@ -14,6 +14,7 @@ spring:
           '[/**]':
             allowedOrigins:
               - "http://localhost:3000"
+              - "https://tu-frontend.railway.app"  # ⬅️ Agregar tu dominio de Railway si tienes frontend
             allowedMethods:
               - GET
               - POST
@@ -57,10 +58,11 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone:  http://eureka-server-production-51f6.up.railway.app/eureka/
+      defaultZone: http://eureka-server-production-3301.up.railway.app/eureka/
   instance:
     prefer-ip-address: true
-    instance-id: ${spring.application.name}:${server.port}
+    instance-id: ${spring.application.name}:${random.value}  # ⬅️ CAMBIO: Usar random en vez de puerto fijo
+    hostname: ${RAILWAY_PUBLIC_DOMAIN:localhost}  # ⬅️ NUEVO: Hostname dinámico
 
 management:
   endpoints:
