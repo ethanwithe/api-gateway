@@ -58,7 +58,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://eureka-server.railway.internal/eureka/
+      defaultZone: http://eureka-server.railway.internal:8761/eureka/
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${random.value}  # ⬅️ CAMBIO: Usar random en vez de puerto fijo
