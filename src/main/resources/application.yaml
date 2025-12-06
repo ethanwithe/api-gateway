@@ -1,0 +1,74 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      # Configuración Global de CORS
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+              - OPTIONS
+            allowedHeaders: "*"
+            exposedHeaders: "*"
+            allowCredentials: true
+            maxAge: 3600
+
+      # Rutas del Gateway
+      routes:
+        # Servicio Usuario
+        - id: servicio-usuario
+          uri: lb://SERVICIO-USUARIO
+          predicates:
+            - Path=/api/users/**
+
+        # Servicio RRHH
+        - id: servicio-rrhh
+          uri: lb://SERVICIO-RRHH
+          predicates:
+            - Path=/api/rrhh/**
+
+        # Servicio Inventario
+        - id: servicio-inventario
+          uri: lb://SERVICIO-INVENTARIO
+          predicates:
+            - Path=/api/inventario/**
+
+        # Servicio Customer
+        - id: servicio-customer
+          uri: lb://SERVICIO-CUSTOMER
+          predicates:
+            - Path=/api/clientes/**
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,gateway
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.loadbalancer: DEBUG
