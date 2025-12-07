@@ -31,7 +31,7 @@ spring:
       routes:
         # Servicio Usuario
         - id: servicio-usuario
-          uri: lb://SERVICIO-USUARIO
+          uri: https://servicio-usuario-production.up.railway.app
           predicates:
             - Path=/api/users/**
 
@@ -43,13 +43,13 @@ spring:
 
         # Servicio Inventario
         - id: servicio-inventario
-          uri: lb://SERVICIO-INVENTARIO
+          uri: https://servicio-inventario-production-5a12.up.railway.app
           predicates:
             - Path=/api/inventario/**
 
         # Servicio Customer
         - id: servicio-customer
-          uri: lb://SERVICIO-CUSTOMER
+          uri: https://serviciocustomer-production.up.railway.app
           predicates:
             - Path=/api/clientes/**
 
