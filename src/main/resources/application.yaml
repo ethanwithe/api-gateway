@@ -14,7 +14,7 @@ spring:
           '[/**]':
             allowedOrigins:
               - "http://localhost:3000"
-              - "https://tu-frontend.railway.app"  # ⬅️ Agregar tu dominio de Railway si tienes frontend
+              - "https://gym-home.vercel.app" # ⬅️ Agregar tu dominio de Railway si tienes frontend
             allowedMethods:
               - GET
               - POST
