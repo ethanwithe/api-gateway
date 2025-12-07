@@ -37,7 +37,7 @@ spring:
 
         # Servicio RRHH
         - id: servicio-rrhh
-          uri: servicio-rrhh-production.up.railway.app
+          uri: https://servicio-rrhh-production.up.railway.app
           predicates:
             - Path=/api/rrhh/**
 
